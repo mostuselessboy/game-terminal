@@ -514,18 +514,11 @@ function HeroSection() {
   // Array of different game concepts to cycle through
   const gameIdeas = [
     "A game about hide and seek",
-    "A puzzle game with time travel mechanics",
-    "An adventure in a magical forest",
-    "A strategy game with resource management",
+    "A puzzle game with a twist",
     "A racing game with power-ups",
-    "A survival game on a deserted island",
-    "A space exploration game with aliens",
     "A cooking competition game",
     "A detective mystery game",
-    "A tower defense with magical creatures",
     "A card game with unique abilities",
-    "A farming simulator with fantasy elements",
-    "A dungeon crawler with roguelike mechanics",
     "A city-building game in the clouds",
     "A multiplayer battle royale",
   ]
