@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'Clash Display';
+    src: url('../public/clashdisplay.ttf') format('truetype');
+  }
+
+
+  @font-face {
+    font-family: 'Clash Display Regular';
+    src: url('../public/clashdisplayregular.ttf') format('truetype');
+  }
+
+
+.font-clash-display {
+    font-family: 'Clash Display', sans-serif;
+}
+
+
+body{
+  background:#0d0d0d;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
