@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import PartnersCarousel from "./partner-corousel"
-
+import TextFillEffect from "./text-fill-animation"
+import RoadmapComponent from "./roadmap"
 
 
 
@@ -276,7 +277,7 @@ function ReimaginedSection() {
 
   return (
     <section className=" text-white py-24 pt-0 md:pb-10 relative overflow-hidden">
-      <div className="container max-w-5xl mx-auto px-4">
+      <div className="container max-w-6xl mx-auto px-4">
         {/* Section Header */}
         <div className="md:mb-16 p-4 md:p-0">
           {/* Reimagined label with enhanced shine effect */}
@@ -292,18 +293,7 @@ function ReimaginedSection() {
             <div className="absolute inset-0 glow-effect"></div>
           </div>
 
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-4xl  font-clash-display leading-tight">
-              No Code, No Wait,
-              <br />
-              From AI-Powered Creation
-            </h2>
-            <h2 className="text-2xl md:text-4xl  font-clash-display leading-tight">
-              <span className="bg-gradient-to-r from-[#8EFE49] to-[#8EFE49] bg-clip-text text-transparent">
-                To Telegram-Ready Playability...
-              </span>
-            </h2>
-          </div>
+          <TextFillEffect />
         </div>
 
         {/* Cards with flexible layout */}
@@ -536,23 +526,23 @@ function HeroSection() {
   }, [gameIdeas.length])
 
   return (
-    <div className=" text-white min-h-screen relative">
+    <div className=" text-white relative">
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none"></div>
 
       {/* Hero Content */}
-      <div className="container mx-auto px-4 pt-16 pb-24 relative">
+      <div className="container h-fit md:min-h-[100vh] mx-auto px-4 pt-16 pb-10 relative">
         <div>
           <img
             src={"./mainherobg.svg"}
-            className="absolute opacity-90  inset-0 w-full h-full object-cover -translate-y-10 mix-blend-screen select-none pointer-events-none"
+            className="absolute opacity-90  inset-0 hidden md:block w-full h-full object-cover -translate-y-10 mix-blend-screen select-none pointer-events-none"
             alt=""
           />
         </div>
-        <div className="max-w-4xl mx-auto text-center mb-12 ">
-          <p className="text-gray-400 uppercase tracking-wider mb-4 text-sm font-clash-display">
+        <div className="max-w-4xl mx-auto text-center mb-12 px-10 md:px-0">
+          <p className="text-gray-400 uppercase tracking-wider mb-6 text-sm font-clash-display">
             REVOLUTIONARY PRODUCT
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-5xl leading-[1] mb-6 font-clash-display tracking-tight">
+          <h1 className="text-3xl md:text-5xl  lg:text-5xl leading-[1] mb-6 font-clash-display tracking-tight">
             <span className="bg-gradient-to-br from-gray-500 via-gray-300 to-white bg-clip-text text-transparent">
               Launch AI-Powered Games With
               <br />A{" "}
@@ -593,77 +583,45 @@ function HeroSection() {
               </span>
             </span>
           </h1>
-          <p className="text-gray-300 text-md md:text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-sm md:text-lg max-w-2xl mx-auto">
             GameTerminal turns your ideas into live games with deploy-ready tokens, AI agents, and instant Telegram
             export - all from one command.
           </p>
         </div>
 
-        {/* Search Bar (non-input version) - Enhanced animation */}
-        <motion.div
-          className="max-w-xs mx-auto relative mb-16 overflow-visible"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-        >
-          <div className="relative">
-            <motion.div
-              className="bg-gradient-to-r from-[#171717] backdrop-blur-2xl to-white/5 rounded-xl border border-gray-50/5 flex items-center px-2 py-2"
-              animate={{ y: [-10, 10, -10] }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 4,
-                ease: "easeInOut",
-              }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 15px 5px rgba(142, 254, 73, 0.2)",
-                transition: { duration: 0.3 },
-              }}
-            >
-              <div>
-                <Search className="text-gray-400 mr-2" size={16} />
-              </div>
-              <div className="flex-1 text-gray-400 text-md select-none">Search for a game...</div>
-              <motion.span
-                className="text-gray-500 text-sm"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, ease: "easeInOut" }}
-              >
-                ⌘K
-              </motion.span>
-            </motion.div>
-            <div className="search-shadow"></div>
-          </div>
-        </motion.div>
 
+        <img
+            src={"./herobg-mobile.png"}
+            className=" object-cover md:hidden select-none pointer-events-none"
+            alt=""
+          />
         {/* Game Input (non-input version) with rotating text */}
         <motion.div
-          className="max-w-3xl mx-auto mt-32 flex flex-col md:flex-row items-center gap-4 bg-gray-900/30 backdrop-blur-sm p-2 rounded-2xl border border-gray-800/50 relative z-10 shadow-md shadow-slate-300/5"
+          className="max-w-3xl mx-auto   md:mt-[42vh] flex flex-row items-center gap-4 bg-gray-900/30 backdrop-blur-sm p-2 rounded-2xl border border-gray-800/50 relative z-10 shadow-md shadow-slate-300/5"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
         >
-          <div className="flex-1 px-4 py-3 text-white text-xl h-14 flex items-center overflow-hidden pointer-events-none select-none">
+
+          <div className="flex-1 px-4 py-3 text-white  text-md md:text-xl h-14 flex items-center overflow-hidden pointer-events-none select-none">
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentIdeaIndex}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 0.2 }}
                 exit={{ y: -20, opacity: 0 }}
                 transition={{ duration: 0.5 }}
                 className="w-full"
               >
-                {gameIdeas[currentIdeaIndex]}
+                A game about hide and seek
               </motion.div>
             </AnimatePresence>
           </div>
           <motion.button
-            className="text-black font-normal px-8 py-3 h-auto text-lg whitespace-nowrap relative overflow-hidden group"
+            className="text-black font-normal px-3 py-2 md:px-6 md:py-3 rounded h-auto text-md md:text-lg whitespace-nowrap relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#9dff5a] to-[#7de43a] rounded-xl border-2 border-[#a5ff6b]/50"></span>
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#9dff5a] to-[#7de43a] rounded-lg border-2 border-[#a5ff6b]/50"></span>
             <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#8EFE49]/50 to-[#7de43a]/90 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></span>
             <span className="absolute inset-0 w-full h-full shadow-[0_0_0_2px_rgba(0,0,0,0.15),0_4px_10px_rgba(0,0,0,0.25)] rounded-xl glow-effect-strong"></span>
             <span className="relative z-10 font-semibold">Get Started</span>
@@ -671,7 +629,7 @@ function HeroSection() {
         </motion.div>
 
         {/* Controls */}
-        <div className="max-w-3xl mx-auto mt-4 flex flex-wrap items-center justify-center gap-6 text-gray-400 relative z-10">
+        <div className="max-w-3xl mx-auto mt-10 flex flex-wrap items-center justify-center gap-6 text-gray-400 relative z-10">
           <div className="flex items-center gap-3">
             <span className="text-gray-500 text-xs">Mode</span>
             <div className="flex items-center gap-1 bg-white/10 rounded-md px-3 py-1.5 text-white text-xs">
@@ -802,14 +760,13 @@ function ArchitectureSection() {
 function RoadmapSection() {
   return (
     <motion.div
-      className="flex flex-col items-center mx-auto max-w-8xl mt-10"
+      className="flex flex-col mt-10"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ margin: "-100px" }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <motion.h1
-        className="md:text-3xl text-2xl leading-[1] md:p-0 px-10 mb-0 font-clash-display tracking-tight text-center w-full"
+        className="md:text-4xl font-semibold text-2xl leading-[1] md:p-0 px-10 mb-20  tracking-tight text-center w-full"
         initial={{ opacity: 0, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, filter: "blur(0px)" }}
         viewport={{ margin: "-100px" }}
@@ -819,22 +776,9 @@ function RoadmapSection() {
           Our 2025 roadmap, one step ahead
         </span>
       </motion.h1>
-      <motion.img
-        src="./roadmap.svg"
-        className="object-center hidden md:flex mb-32 mt-[7rem]"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ margin: "-100px" }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-      />
-      <motion.img
-        src="./roadmap-mobile.svg"
-        className="object-center md:hidden mb-2 mt-[7rem]"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ margin: "-100px" }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-      />
+
+
+      <RoadmapComponent />
     </motion.div>
   )
 }

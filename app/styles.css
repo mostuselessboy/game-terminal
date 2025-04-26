@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'Clash Display';
-    src: url('../public/clashdisplay.ttf') format('truetype');
+    src: url('../public/clashdisplayvariable.ttf') format('truetype');
   }
 
 
   @font-face {
     font-family: 'Clash Display Regular';
-    src: url('../public/clashdisplayregular.ttf') format('truetype');
+    src: url('../public/clashdisplayvariable.ttf') format('truetype');
   }
 
 
