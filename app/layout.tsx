@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next/types";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./styles.css";  
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   description: "DEMO",
   openGraph: {
     title: "Game Terminal",
-    description: "DEMO",
+    description: "Game Terminal",
     images: [
       {
-        url: "/logo.svg",
+        url: "./logo.png",
         width: 800,
         height: 600,
       },

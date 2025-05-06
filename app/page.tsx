@@ -492,7 +492,7 @@ function HeroSection() {
 
         {/* Game Input (non-input version) with rotating text */}
         <motion.div
-          className="max-w-3xl mx-auto mt-[3vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[45vh] 2xl:mt-[48vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
+          className="max-w-3xl mx-auto mt-[3vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[45vh] 2xl:mt-[50vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
