@@ -6,6 +6,9 @@ import Link from "next/link"
 import PartnersCarousel from "./partner-corousel"
 import TextFillEffect from "./text-fill-animation"
 import RoadmapComponent from "./roadmap"
+import ShiningText from "./shining-text"
+
+import ReimaginedCombinedCards from "./ReimaginedSection/reimagine-combined"
 
 
 
@@ -275,9 +278,11 @@ function ReimaginedSection() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Calculate scale factor based on container width
+
   return (
-    <section className=" text-white py-24 pt-0 md:pb-10 relative overflow-hidden">
-      <div className="container max-w-6xl mx-auto px-4">
+    <section className="text-white py-24 pt-0 md:pb-10 relative overflow-hidden">
+      <div className="container mx-auto px-4 ">
         {/* Section Header */}
         <div className="md:mb-16 p-4 md:p-0">
           {/* Reimagined label with enhanced shine effect */}
@@ -296,96 +301,8 @@ function ReimaginedSection() {
           <TextFillEffect />
         </div>
 
-        {/* Cards with flexible layout */}
-        <div className="flex flex-wrap justify-center gap-2 items-center">
-          {/* Hidden images to measure natural dimensions */}
-          <div className="hidden">
-            <img ref={timeRef} src="/minicard-time.svg" alt="" />
-            <img ref={cubeRef} src="/minicard-cube.svg" alt="" />
-            <img ref={pacmanRef} src="/minicard-pacman.svg" alt="" />
-            <img ref={telegramRef} src="/minicard-telegram.svg" alt="" />
-          </div>
 
-          {/* Card 1 - Time - from left */}
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: "-100px" }}
-            className="relative"
-            style={{ height: "300px", width: cardWidths.time || "auto" }}
-            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-            animate={{
-              y: [0, -8, 0],
-              rotate: [0, 1, 0],
-            }}
-            transition={{
-              y: { repeat: Number.POSITIVE_INFINITY, duration: 4, ease: "easeInOut" },
-              rotate: { repeat: Number.POSITIVE_INFINITY, duration: 5, ease: "easeInOut" },
-            }}
-          >
-            <img src="/minicard-time.svg" alt="Lightning-Fast Game Creation" className="w-full h-full object-contain" />
-          </motion.div>
-
-          {/* Card 2 - Onchain - from bottom */}
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-100px" }}
-            className="relative"
-            style={{ height: "287px", width: cardWidths.cube || "auto" }}
-            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-            animate={{
-              y: [0, -10, 0],
-              rotate: [0, -1, 0],
-            }}
-            transition={{
-              y: { repeat: Number.POSITIVE_INFINITY, duration: 4.5, ease: "easeInOut" },
-              rotate: { repeat: Number.POSITIVE_INFINITY, duration: 5.5, ease: "easeInOut" },
-            }}
-          >
-            <img src="/minicard-cube.svg" alt="Onchain By Default" className="w-full h-full object-contain" />
-          </motion.div>
-
-          {/* Card 3 - Pacman/Lightning - from top */}
-          <motion.div
-            initial={{ opacity: 0, y: -100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-100px" }}
-            className="relative"
-            style={{ height: "290px", width: cardWidths.pacman || "auto" }}
-            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-            animate={{
-              y: [0, -7, 0],
-              rotate: [0, 1.5, 0],
-            }}
-            transition={{
-              y: { repeat: Number.POSITIVE_INFINITY, duration: 5, ease: "easeInOut" },
-              rotate: { repeat: Number.POSITIVE_INFINITY, duration: 6, ease: "easeInOut" },
-            }}
-          >
-            <img src="/minicard-pacman.svg" alt="AI-Powered Game Design" className="w-full h-full object-contain" />
-          </motion.div>
-
-          {/* Card 4 - Telegram - from right */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: "-100px" }}
-            className="relative"
-            style={{ height: "310px", width: cardWidths.telegram || "auto" }}
-            whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-            animate={{
-              y: [0, -9, 0],
-              rotate: [0, -1.2, 0],
-            }}
-            transition={{
-              y: { repeat: Number.POSITIVE_INFINITY, duration: 4.2, ease: "easeInOut" },
-              rotate: { repeat: Number.POSITIVE_INFINITY, duration: 5.2, ease: "easeInOut" },
-            }}
-          >
-            <img src="/minicard-telegram.svg" alt="Telegram-Ready" className="w-full h-full object-contain" />
-          </motion.div>
-        </div>
+      <ReimaginedCombinedCards />
       </div>
       {/* Enhanced CSS for shine effects */}
       <style jsx>{`
@@ -501,51 +418,29 @@ function ReimaginedSection() {
 }
 
 function HeroSection() {
-  // Array of different game concepts to cycle through
-  const gameIdeas = [
-    "A game about hide and seek",
-    "A puzzle game with a twist",
-    "A racing game with power-ups",
-    "A cooking competition game",
-    "A detective mystery game",
-    "A card game with unique abilities",
-    "A city-building game in the clouds",
-    "A multiplayer battle royale",
-  ]
-
-  // State to track the current game idea index
-  const [currentIdeaIndex, setCurrentIdeaIndex] = useState(0)
-
-  // Effect to cycle through game ideas
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIdeaIndex((prevIndex) => (prevIndex + 1) % gameIdeas.length)
-    }, 3000) // Change every 3 seconds
-
-    return () => clearInterval(interval)
-  }, [gameIdeas.length])
-
   return (
-    <div className=" text-white relative">
+    <div className="text-white overflow-x-hidden">
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 select-none"></div>
 
       {/* Hero Content */}
-      <div className="container h-fit md:min-h-[100vh] mx-auto px-4 pt-16 pb-10 relative">
+      <div className="w-full h-fit md:min-h-[100vh] overflow-hidden mx-auto px-4 pt-16 pb-10 relative">
         <div>
           <img
-            src={"./mainherobg.svg"}
-            className="absolute opacity-90  inset-0 hidden md:block w-full h-full object-cover -translate-y-10 mix-blend-screen select-none pointer-events-none"
+            src="./mainherobg.svg"
+            className="absolute opacity-90 inset-0 hidden md:block w-full scale-[1.1] h-full object-cover translate-y-[15px] mix-blend-screen select-none pointer-events-none"
             alt=""
           />
         </div>
-        <div className="max-w-4xl mx-auto text-center mb-12 px-10 md:px-0">
+
+        <div className="max-w-4xl mx-auto text-center mb-12 px-10 md:px-0 mt-5 2xl:mt-5">
           <p className="text-gray-400 uppercase tracking-wider mb-6 text-sm font-clash-display">
             REVOLUTIONARY PRODUCT
           </p>
-          <h1 className="text-3xl md:text-5xl  lg:text-5xl leading-[1] mb-6 font-clash-display tracking-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-5xl leading-[1] mb-6 font-clash-display tracking-tight">
             <span className="bg-gradient-to-br from-gray-500 via-gray-300 to-white bg-clip-text text-transparent">
               Launch AI-Powered Games With
-              <br />A{" "}
+              <br />
+              A{" "}
               <span className="relative inline-block px-4 bg-gradient-to-r from-gray-100 via-gray-50 to-white bg-clip-text text-transparent">
                 <svg
                   width="14"
@@ -589,89 +484,47 @@ function HeroSection() {
           </p>
         </div>
 
-
         <img
-            src={"./herobg-mobile.png"}
-            className=" object-cover md:hidden select-none pointer-events-none"
-            alt=""
-          />
+          src="./herobg-mobile.png"
+          className="object-cover md:hidden select-none pointer-events-none"
+          alt=""
+        />
+
         {/* Game Input (non-input version) with rotating text */}
         <motion.div
-          className="max-w-3xl mx-auto   md:mt-[42vh] flex flex-row items-center gap-4 bg-gray-900/30 backdrop-blur-sm p-2 rounded-2xl border border-gray-800/50 relative z-10 shadow-md shadow-slate-300/5"
+          className="max-w-3xl mx-auto mt-[3vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[45vh] 2xl:mt-[48vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
         >
-
-          <div className="flex-1 px-4 py-3 text-white  text-md md:text-xl h-14 flex items-center overflow-hidden pointer-events-none select-none">
+          <div className="w-full p-[1px] bg-gradient-to-br from-[#293728] via-[#101710] to-[#101710] rounded-xl">
+          <div className="flex items-center justify-between w-full bg-gradient-to-b p-2 from-[#101710] to-[#101410] rounded-xl">
+          <div className="flex-1 px-4 py-3 text-white text-md md:text-xl h-14 flex items-center overflow-hidden pointer-events-none select-none">
             <AnimatePresence mode="wait">
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 0.2 }}
-                exit={{ y: -20, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="w-full"
-              >
-                A game about hide and seek
-              </motion.div>
+              <ShiningText />
             </AnimatePresence>
           </div>
           <motion.button
-            className="text-black font-normal px-3 py-2 md:px-6 md:py-3 rounded h-auto text-md md:text-lg whitespace-nowrap relative overflow-hidden group"
+            className="text-black font-normal px-2 py-1 md:px-6 md:py-3 rounded h-auto text-md md:text-lg whitespace-nowrap relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#9dff5a] to-[#7de43a] rounded-lg border-2 border-[#a5ff6b]/50"></span>
             <span className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#8EFE49]/50 to-[#7de43a]/90 opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></span>
             <span className="absolute inset-0 w-full h-full shadow-[0_0_0_2px_rgba(0,0,0,0.15),0_4px_10px_rgba(0,0,0,0.25)] rounded-xl glow-effect-strong"></span>
-            <span className="relative z-10 font-semibold">Get Started</span>
+            <span className="relative z-10 font-semibold tracking-tight text-sm md:text-lg">Get Started</span>
           </motion.button>
+          </div>
+          </div>
         </motion.div>
-
-        {/* Controls */}
-        <div className="max-w-3xl mx-auto mt-10 flex flex-wrap items-center justify-center gap-6 text-gray-400 relative z-10">
-          <div className="flex items-center gap-3">
-            <span className="text-gray-500 text-xs">Mode</span>
-            <div className="flex items-center gap-1 bg-white/10 rounded-md px-3 py-1.5 text-white text-xs">
-              <span>With Interface</span>
-              <ChevronDown size={12} />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-gray-500 text-xs">Number of pages</span>
-            <div className="flex items-center gap-1 bg-white/10 rounded-md px-3 py-1.5 text-white text-xs">
-              <span>2 - 4 Pages</span>
-              <ChevronDown size={12} />
-            </div>
-          </div>
-
-          <button className="flex items-center gap-1 bg-black/50 rounded-md px-3 py-1.5 border border-gray-800/50 text-white text-xs">
-            <Plus size={12} />
-            <span>Add Styles</span>
-          </button>
-
-          <button className="flex items-center justify-center bg-black/50 rounded-md w-7 h-7 border border-gray-800/50 text-white">
-            <Plus size={12} />
-          </button>
-        </div>
-        {/* <div className="pt-20">
-          <svg width="1280" height="11" viewBox="0 0 1280 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line opacity="0.5" x1="1160.5" y1="-2.18557e-08" x2="1160.5" y2="11" stroke="#8EFE49" />
-            <line opacity="0.5" x1="1166" y1="5.5" x2="1155" y2="5.5" stroke="#8EFE49" />
-            <line opacity="0.5" x1="119.5" y1="-2.18557e-08" x2="119.5" y2="11" stroke="#8EFE49" />
-            <line opacity="0.5" x1="125" y1="5.5" x2="114" y2="5.5" stroke="#8EFE49" />
-            <line opacity="0.1" x1="-2" y1="5.5" x2="1281" y2="5.5" stroke="white" strokeDasharray="8 8" />
-          </svg>
-        </div> */}
       </div>
     </div>
-  )
+  );
 }
 function SolutionSection() {
   return (
     <motion.div
-      className="flex flex-col items-center mx-auto max-w-7xl"
+      className="flex flex-col items-center mx-auto mw-full bg-gradient-to-b from-transparent to-[#0d0d0d]"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ margin: "-100px" }}
@@ -698,7 +551,7 @@ function SolutionSection() {
       </motion.h1>
       <motion.img
         src="./solution-content.svg"
-        className="object-center hidden md:flex translate-x-[4rem]"
+        className="object-center hidden md:flex w-6xl "
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ margin: "-100px" }}
@@ -706,7 +559,7 @@ function SolutionSection() {
       />
       <motion.img
         src="./solution-content-mobile.svg"
-        className="object-center md:hidden  p-2"
+        className="object-center md:hidden  px-10"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ margin: "-100px" }}
@@ -719,7 +572,7 @@ function SolutionSection() {
 function ArchitectureSection() {
   return (
     <motion.div
-      className="flex flex-col items-center mx-auto w-full mt-2"
+      className="flex flex-col items-center mx-auto w-full bg-[#0d0d0d]"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ margin: "-100px" }}
@@ -738,7 +591,7 @@ function ArchitectureSection() {
         </span>
       </motion.h1>
       <motion.img
-        src="./arch.svg"
+        src="./robotarch.png"
         className="w-full hidden md:flex select-none pointer-events-none"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -747,7 +600,7 @@ function ArchitectureSection() {
       />
       <motion.img
         src="./arch-mobile.svg"
-        className="w-full md:hidden select-none pointer-events-none p-5"
+        className="w-full md:hidden select-none pointer-events-none "
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ margin: "-100px" }}
@@ -760,13 +613,13 @@ function ArchitectureSection() {
 function RoadmapSection() {
   return (
     <motion.div
-      className="flex flex-col mt-10"
+      className="flex flex-col pt-[5rem] bg-gradient-to-t from-transparent to-[#0d0d0d]"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <motion.h1
-        className="md:text-4xl font-semibold text-2xl leading-[1] md:p-0 px-10 mb-20  tracking-tight text-center w-full"
+        className="md:text-4xl font-semibold text-2xl leading-[1] md:p-0 px-10 mb-20   tracking-tight text-center w-full"
         initial={{ opacity: 0, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, filter: "blur(0px)" }}
         viewport={{ margin: "-100px" }}
@@ -1193,6 +1046,8 @@ export default function Page() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.8 }}>
         <ReimaginedSection />
       </motion.div>
+
+      
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.2 }}>
         <SolutionSection />

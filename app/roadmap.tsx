@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
 import RoadmapDesignElement from "@/components/roadmap-design-element"
 import Image from "next/image"
@@ -17,13 +17,88 @@ const generateDashOpacities = (count: number) => {
 // Pre-calculated opacities for timeline dashes
 const DASH_OPACITIES = generateDashOpacities(100)
 
+// Roadmap data
+const roadmapData = [
+  {
+    quarter: "Q1 2025",
+    items: [
+      "Beta Release Of AI Game + Token Builder.",
+      "Game Creation From AI Prompts.",
+      "Token Integration For Game Ecosystems.",
+      "Deployment To Viral Channels.",
+      "Launch Compatible Studio For Mobile Games.",
+    ],
+    align: "right",
+    isActive: false,
+    isEven: false,
+  },
+  {
+    quarter: "Q2 2025",
+    items: [
+      "Execute Token Generation Event (TGE).",
+      "Conduct Initial DEX Offering (IDO).",
+      "List Tokens On Major Exchanges.",
+      "Launch Multiplayer SDK And APIs.",
+      "Rollout NFT Marketplace.",
+    ],
+    align: "left",
+    isActive: true,
+    isEven: true,
+  },
+  {
+    quarter: "Q3 2025",
+    items: [
+      "Partner With 100+ Games For Ecosystem Expansion.",
+      "Launch Platform-Wide Competitive Tournaments.",
+      "Onboard 500+ Gaming Influencers (Degens).",
+      "Expand Game Library To 200+ Titles.",
+    ],
+    align: "right",
+    isActive: false,
+    isEven: false,
+  },
+  {
+    quarter: "Q4 2025",
+    items: [
+      "Achieve 1M+ Active Users.",
+      "Debut Proprietary In-House Games.",
+      "Expand Game Library To 300+ Titles.",
+      "Announce 2026 Roadmap.",
+    ],
+    align: "left",
+    isActive: false,
+    isEven: true,
+  },
+]
+
 export default function RoadmapPage() {
   // Force client-side rendering to avoid hydration mismatches
   const [isClient, setIsClient] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [direction, setDirection] = useState(0) // 0 = neutral, 1 = down, -1 = up
 
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  // Track scroll direction
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY
+
+    // Determine scroll direction
+    if (currentScrollY > lastScrollY + 10) {
+      setDirection(1) // scrolling down
+    } else if (currentScrollY < lastScrollY - 10) {
+      setDirection(-1) // scrolling up
+    }
+
+    setLastScrollY(currentScrollY)
+  }, [lastScrollY])
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [handleScroll])
 
   // Don't render anything during SSR to avoid hydration mismatches
   if (!isClient) {
@@ -35,8 +110,8 @@ export default function RoadmapPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-20" style={{ backgroundColor: "#141414" }}>
-      <div className=" mx-auto w-full px-5">
+    <div className="min-h-screen flex items-center justify-center py-20">
+      <div className="mx-auto w-full px-5">
         <div className="relative">
           {/* Vertical timeline with dashes instead of dots - desktop only */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 z-0 hidden md:block">
@@ -53,7 +128,7 @@ export default function RoadmapPage() {
           </div>
 
           {/* Mobile timeline - left aligned but pushed right - mobile only */}
-          <div className="absolute left-[100px] top-0 bottom-0 w-px z-0 block md:hidden">
+          <div className="absolute left-[80px] top-0 bottom-0 w-px z-0 block md:hidden">
             {DASH_OPACITIES.map((opacity, i) => (
               <div
                 key={i}
@@ -66,60 +141,59 @@ export default function RoadmapPage() {
             ))}
           </div>
 
-          <div className="space-y-60 md:space-y-48">
-            <RoadmapQuarter
-              quarter="Q1 2025"
-              items={[
-                "Beta Release Of AI Game + Token Builder.",
-                "Game Creation From AI Prompts.",
-                "Token Integration For Game Ecosystems.",
-                "Deployment To Viral Channels.",
-                "Launch Compatible Studio For Mobile Games.",
-              ]}
-              align="right"
-              isActive={false}
-              isEven={false}
-            />
-            <RoadmapQuarter
-              quarter="Q2 2025"
-              items={[
-                "Execute Token Generation Event (TGE).",
-                "Conduct Initial DEX Offering (IDO).",
-                "List Tokens On Major Exchanges.",
-                "Launch Multiplayer SDK And APIs.",
-                "Rollout NFT Marketplace.",
-              ]}
-              align="left"
-              isActive={true}
-              isEven={true}
-            />
-            <RoadmapQuarter
-              quarter="Q3 2025"
-              items={[
-                "Partner With 100+ Games For Ecosystem Expansion.",
-                "Launch Platform-Wide Competitive Tournaments.",
-                "Onboard 500+ Gaming Influencers (Degens).",
-                "Expand Game Library To 200+ Titles.",
-              ]}
-              align="right"
-              isActive={false}
-              isEven={false}
-            />
-            <RoadmapQuarter
-              quarter="Q4 2025"
-              items={[
-                "Achieve 1M+ Active Users.",
-                "Debut Proprietary In-House Games.",
-                "Expand Game Library To 300+ Titles.",
-                "Announce 2026 Roadmap.",
-              ]}
-              align="left"
-              isActive={false}
-              isEven={true}
-            />
+          <div className="space-y-40 md:space-y-48">
+            {roadmapData.map((quarter, index) => (
+              <RoadmapSection key={quarter.quarter} quarter={quarter} direction={direction} />
+            ))}
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+interface RoadmapSectionProps {
+  quarter: {
+    quarter: string
+    items: string[]
+    align: string
+    isActive: boolean
+    isEven: boolean
+  }
+  direction: number
+}
+
+function RoadmapSection({ quarter, direction }: RoadmapSectionProps) {
+  const sectionRef = useRef(null)
+
+  // Check if section is in view - use a small threshold so it starts animating early
+  const isInView = useInView(sectionRef, {
+    once: false,
+    amount: 0.1, // Only need 10% of the element to be visible
+  })
+
+  return (
+    <div ref={sectionRef}>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{
+          opacity: isInView ? 1 : 0,
+          y: isInView ? 0 : direction >= 0 ? 50 : -50,
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
+        <RoadmapQuarter
+          quarter={quarter.quarter}
+          items={quarter.items}
+          align={quarter.align as "left" | "right"}
+          isActive={quarter.isActive}
+          isEven={quarter.isEven}
+          isVisible={isInView}
+        />
+      </motion.div>
     </div>
   )
 }
@@ -143,27 +217,22 @@ interface RoadmapQuarterProps {
   align: "left" | "right"
   isActive: boolean
   isEven: boolean
+  isVisible: boolean
 }
 
-function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuarterProps) {
+function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: RoadmapQuarterProps) {
   const ref = useRef(null)
   const [hasAnimated, setHasAnimated] = useState(false)
   const [viewportChanged, setViewportChanged] = useState(false)
   const controls = useAnimation()
 
-  // Use once: true to ensure animations only play once when scrolling
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.3,
-  })
-
   // Effect to handle initial animation when in view
   useEffect(() => {
-    if (isInView && !hasAnimated) {
+    if (isVisible && !hasAnimated) {
       controls.start("visible")
       setHasAnimated(true)
     }
-  }, [isInView, hasAnimated, controls])
+  }, [isVisible, hasAnimated, controls])
 
   // Effect to handle viewport size changes
   useEffect(() => {
@@ -238,13 +307,15 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
     <div ref={ref} className="relative z-10 min-h-[200px]">
       {/* Timeline dot with pulse effect and dark circular background */}
       <div
-        className="absolute w-6 h-6 rounded-full z-10 flex items-center justify-center
-                  md:left-1/2 t
-                  left-[100px] -translate-x-1/3 md:-translate-x-3"
+        className={`absolute rounded-full z-10 flex items-center justify-center
+                  md:left-1/2 
+                  left-[80px] -translate-x-1/3 md:-translate-x-3
+                  ${isActive ? "md:w-6 md:h-6 w-2 h-2" : "w-5 h-5"}`}
         style={{ backgroundColor: bgColor }}
       >
         <motion.div
-          className="absolute w-6 h-6 rounded-full opacity-70"
+          className={`absolute rounded-full opacity-70
+                  ${isActive ? "md:w-6 md:h-6 w-3 h-3" : "w-6 h-6"}`}
           style={{ backgroundColor: pulseColor }}
           animate={{
             scale: [1, 1.2, 1],
@@ -257,7 +328,7 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
           }}
         />
         <motion.div
-          className="w-2 h-2 rounded-full z-20"
+          className={`rounded-full z-20 ${isActive ? "md:w-2 md:h-2 w-1 h-1" : "w-2 h-2"}`}
           style={{ backgroundColor: dotColor }}
           initial={{ scale: 0 }}
           animate={hasAnimated ? { scale: 1 } : { scale: 0 }}
@@ -302,7 +373,7 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
         className="absolute top-3 h-px z-10 block md:hidden"
         style={{
           width: `${lineLength}px`,
-          left: "calc(100px + 3px)", // Position it to the right of the timeline dot
+          left: isActive ? "calc(80px + 2px)" : "calc(80px + 3px)", // Adjust for smaller active dot
         }}
       >
         <motion.div
@@ -347,7 +418,7 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
           className={`text-2xl font-medium z-[200] mb-8 ${align === "left" ? "text-right" : "text-left"} text-white`}
           initial={{ opacity: 0, y: 20 }}
           animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           {quarter}
         </motion.h2>
@@ -379,12 +450,11 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
 
       {/* Mobile content container - pushed right */}
       <div
-        className="absolute left-[180px] right-4 top-0 block md:hidden"
+        className="absolute left-[160px] right-4 top-0 block md:hidden"
         style={{
           top: "-12px",
         }}
       >
-
         {/* Design element positioned above the heading for mobile */}
         <div className="absolute left-6 -top-10 pointer-events-none scale-150 z-[10]">
           <img src="./roadmap-design-element.png" className="w-32 scale-x-[-1]" alt="" />
@@ -392,25 +462,24 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
 
         {/* Quarter heading - left aligned */}
         <motion.h2
-          className="text-2xl z-[10] font-medium mb-8 text-white relative"
+          className="text-xl z-[10] font-medium mb-6 text-white relative"
           initial={{ opacity: 0, y: 20 }}
           animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           {quarter}
         </motion.h2>
 
         {/* List items - left aligned */}
-        <motion.div variants={containerVariants} initial="hidden" animate={controls} className="space-y-3">
+        <motion.div variants={containerVariants} initial="hidden" animate={controls} className="space-y-2">
           {items.map((item, idx) => (
             <motion.p
               key={idx}
               variants={itemVariants}
-              custom={idx} // Pass index to custom prop for staggered animations
-              className="leading-tight font-light"
+              custom={idx}
+              className="leading-tight font-light text-xs"
               style={{
                 opacity: getOpacity(idx, items.length),
-                // Dimmer color gradient: brighter to dimmer
                 color: `rgb(${160 - idx * 10}, ${160 - idx * 10}, ${160 - idx * 10})`,
               }}
             >
@@ -452,7 +521,7 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven }: RoadmapQuar
         <div
           className="absolute left-0 top-3 block md:hidden"
           style={{
-            width: "100px",
+            width: "80px",
             zIndex: 5, // Ensure it's above other elements
           }}
         >
