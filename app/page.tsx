@@ -284,7 +284,7 @@ function ReimaginedSection() {
     <section className="text-white py-24 pt-0 md:pb-10 relative overflow-hidden">
       <div className="container mx-auto px-4 ">
         {/* Section Header */}
-        <div className="md:mb-16 p-4 md:p-0">
+        <div className="md:mb-16 p-4 md:p-0 xl:translate-x-[65px] 2xl:translate-x-[0px]">
           {/* Reimagined label with enhanced shine effect */}
           <div className="inline-flex items-center gap-2 px-6 py-1 -translate-x-2 bg-[#111111] rounded-full mb-6 relative overflow-hidden shine-button">
             <div className="relative z-10 flex items-center gap-2">
@@ -299,6 +299,7 @@ function ReimaginedSection() {
           </div>
 
           <TextFillEffect />
+
         </div>
 
 
@@ -427,7 +428,7 @@ function HeroSection() {
         <div>
           <img
             src="./mainherobg.svg"
-            className="absolute opacity-90 inset-0 hidden md:block w-full scale-[1.1] h-full object-cover translate-y-[15px] mix-blend-screen select-none pointer-events-none"
+            className="absolute opacity-90 inset-0 hidden md:block w-full scale-[1.1] h-full object-cover translate-y-[-20px] mix-blend-screen select-none pointer-events-none"
             alt=""
           />
         </div>
@@ -492,7 +493,7 @@ function HeroSection() {
 
         {/* Game Input (non-input version) with rotating text */}
         <motion.div
-          className="max-w-3xl mx-auto mt-[3vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[45vh] 2xl:mt-[50vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
+          className="max-w-3xl mx-auto mt-[2vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[37vh] 2xl:mt-[48vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
@@ -694,11 +695,11 @@ function BackerSection() {
           <motion.img
             key={idx}
             src={src}
-            className="w-4/5 max-w-xs"
+            className="w-[100%] max-w-md"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ margin: "-100px" }}
-            transition={{ duration: 0.4, delay: 0.1 * idx }}
+             transition={{ duration: 0.4, delay: 0.1 * idx }}
           />
         ))}
       </div>
