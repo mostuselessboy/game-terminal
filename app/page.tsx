@@ -428,7 +428,7 @@ function HeroSection() {
         <div>
           <img
             src="./mainherobg.svg"
-            className="absolute opacity-90 inset-0 hidden md:block w-full scale-[1.1] h-full object-cover translate-y-[-20px] mix-blend-screen select-none pointer-events-none"
+            className="absolute opacity-90 inset-0 hidden md:block w-full scale-[1.1] h-full object-cover translate-y-[-50px] mix-blend-screen select-none pointer-events-none"
             alt=""
           />
         </div>
@@ -493,7 +493,7 @@ function HeroSection() {
 
         {/* Game Input (non-input version) with rotating text */}
         <motion.div
-          className="max-w-3xl mx-auto mt-[2vh] md:mt-[40vh] lg:mt-[44vh] xl:mt-[37vh] 2xl:mt-[48vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
+          className="max-w-3xl mx-auto mt-[2vh] md:mt-[30vh] lg:mt-[30vh] xl:mt-[32vh] 2xl:mt-[43vh] p-3 bg-[#151A15] flex flex-row items-center gap-4   backdrop-blur-sm  rounded-2xl  relative z-10 "
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
@@ -592,7 +592,7 @@ function ArchitectureSection() {
         </span>
       </motion.h1>
       <motion.img
-        src="./robotarch.png"
+        src="./robotarch.svg"
         className="w-full hidden md:flex select-none pointer-events-none"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -614,11 +614,13 @@ function ArchitectureSection() {
 function RoadmapSection() {
   return (
     <motion.div
-      className="flex flex-col pt-[5rem] bg-gradient-to-t from-transparent to-[#0d0d0d]"
+      className="flex flex-col pt-[5rem] bg-gradient-to-t from-transparent to-[#0d0d0d] relative"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
+      <img src="/roadmap-design-elem-1.svg" className="hidden lg:block absolute bottom-[30rem] left-0 w-fit" />
+      <img src="/roadmap-design-elem-2.svg" className="hidden lg:block absolute top-[20rem] right-0 w-fit" />
       <motion.h1
         className="md:text-4xl font-semibold text-2xl leading-[1] md:p-0 px-10 mb-20   tracking-tight text-center w-full"
         initial={{ opacity: 0, filter: "blur(8px)" }}
@@ -626,7 +628,7 @@ function RoadmapSection() {
         viewport={{ margin: "-100px" }}
         transition={{ duration: 0.5, delay: 0.15 }}
       >
-        <span className="bg-gradient-to-br from-gray-500 via-gray-300 to-white bg-clip-text text-transparent">
+        <span className="bg-gradient-to-br from-gray-500 via-gray-300 to-white bg-clip-text font-normal text-transparent font-clash-display">
           Our 2025 roadmap, one step ahead
         </span>
       </motion.h1>
@@ -753,27 +755,26 @@ function EnhancedGradientFaq() {
 
   const faqItems: FaqItem[] = [
     {
-      question: "Which payment methods do you accept?",
+      question: "What is GameTerminal?",
       answer:
-        "We accept credit cards (Visa, Mastercard, American Express), PayPal, bank transfers, and cryptocurrency payments including Bitcoin and Ethereum.",
+        "GameTerminal is an AI-powered platform where users can create on-chain games just by writing text prompts. Our platform allows you to generate games instantly, launch tokens associated with them, and even deploy them as Telegram mini-apps. Whether you want to create betting games, hyper-casual games, or AI-powered strategy games, GameTerminal has you covered.",
     },
     {
-      question: "Do you offer discounts for long-term commitments ?",
+      question: "How do I create a game on GameTerminal?",
       answer:
-        "DePIN, or Decentralized Physical Infrastructure Networks, leverages blockchains, IoT and the greater Web3 ecosystem to create, operate and maintain real-world physical infrastructure. These networks leverage token incentives to coordinate, reward and safeguard members of the network. io.net is the first and only GPU DePIN. We are optimized for machine learning but suitable for all GPU use cases as we connect computing power providers with users to offer accessibility and profit for everyone involved.",
+        "Creating a game is simple. Connect your wallet, write your game idea as a text prompt, and click the \"Magic\" button to refine it. Our AI will then build your game, and you can launch it directly with an associated token. You can also deploy your game as a Telegram mini-app with a single click.",
     },
     {
-      question: "Which payment methods do you accept?",
+      question: "What are the benefits of launching a game with a token on GameTerminal?",
       answer:
-        "We accept all major credit cards, PayPal, bank transfers, and various cryptocurrencies including Bitcoin, Ethereum, and USDC.",
+        "Launching a game with a token adds a financial layer to your game, creating a play-to-earn experience. Tokens generated can have locked liquidity, and users can earn rewards by participating in the game. This creates a vibrant economy around your game and provides additional incentives for players.",
     },
     {
-      question: "How does the pricing and billing system work?",
+      question: "Is GameTerminal only for developers?",
       answer:
-        "Our pricing is based on usage with transparent billing cycles. You'll only pay for the resources you consume, with detailed invoices provided at the end of each billing period. Volume discounts are available for enterprise customers.",
+        "No, GameTerminal is designed for everyone. Whether you are a game developer, a creator, or just someone with a creative idea, you can use GameTerminal to turn your ideas into real, playable games without any coding skills.",
     },
-  ]
-
+  ];
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }

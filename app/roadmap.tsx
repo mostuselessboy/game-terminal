@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useRef, useState, useCallback } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
 import RoadmapDesignElement from "@/components/roadmap-design-element"
@@ -29,7 +28,6 @@ const roadmapData = [
       "Launch Compatible Studio For Mobile Games.",
     ],
     align: "right",
-    isActive: false,
     isEven: false,
   },
   {
@@ -42,7 +40,6 @@ const roadmapData = [
       "Rollout NFT Marketplace.",
     ],
     align: "left",
-    isActive: true,
     isEven: true,
   },
   {
@@ -54,7 +51,6 @@ const roadmapData = [
       "Expand Game Library To 200+ Titles.",
     ],
     align: "right",
-    isActive: false,
     isEven: false,
   },
   {
@@ -66,7 +62,6 @@ const roadmapData = [
       "Announce 2026 Roadmap.",
     ],
     align: "left",
-    isActive: false,
     isEven: true,
   },
 ]
@@ -76,14 +71,18 @@ export default function RoadmapPage() {
   const [isClient, setIsClient] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [direction, setDirection] = useState(0) // 0 = neutral, 1 = down, -1 = up
+  const [activeIndex, setActiveIndex] = useState(0) // Start with the first phase active
+
+  const sectionRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
     setIsClient(true)
   }, [])
 
-  // Track scroll direction
+  // Track scroll direction and active section
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY
+    const viewportHeight = window.innerHeight
 
     // Determine scroll direction
     if (currentScrollY > lastScrollY + 10) {
@@ -91,6 +90,17 @@ export default function RoadmapPage() {
     } else if (currentScrollY < lastScrollY - 10) {
       setDirection(-1) // scrolling up
     }
+
+    // Determine which section is active based on scroll position
+    sectionRefs.current.forEach((ref, index) => {
+      if (!ref) return
+
+      const rect = ref.getBoundingClientRect()
+      // If the section is in the top half of the viewport
+      if (rect.top < viewportHeight * 0.5 && rect.bottom > 0) {
+        setActiveIndex(index)
+      }
+    })
 
     setLastScrollY(currentScrollY)
   }, [lastScrollY])
@@ -107,6 +117,11 @@ export default function RoadmapPage() {
         <div className="text-white text-center">Loading roadmap...</div>
       </div>
     )
+  }
+
+  // Function to set the ref for each section
+  const setSectionRef = (el: HTMLDivElement | null, index: number) => {
+    sectionRefs.current[index] = el
   }
 
   return (
@@ -143,7 +158,9 @@ export default function RoadmapPage() {
 
           <div className="space-y-40 md:space-y-48">
             {roadmapData.map((quarter, index) => (
-              <RoadmapSection key={quarter.quarter} quarter={quarter} direction={direction} />
+              <div key={quarter.quarter} ref={(el) => setSectionRef(el, index)}>
+                <RoadmapSection quarter={quarter} direction={direction} isActive={index === activeIndex} />
+              </div>
             ))}
           </div>
         </div>
@@ -157,13 +174,13 @@ interface RoadmapSectionProps {
     quarter: string
     items: string[]
     align: string
-    isActive: boolean
     isEven: boolean
   }
   direction: number
+  isActive: boolean
 }
 
-function RoadmapSection({ quarter, direction }: RoadmapSectionProps) {
+function RoadmapSection({ quarter, direction, isActive }: RoadmapSectionProps) {
   const sectionRef = useRef(null)
 
   // Check if section is in view - use a small threshold so it starts animating early
@@ -189,7 +206,7 @@ function RoadmapSection({ quarter, direction }: RoadmapSectionProps) {
           quarter={quarter.quarter}
           items={quarter.items}
           align={quarter.align as "left" | "right"}
-          isActive={quarter.isActive}
+          isActive={isActive}
           isEven={quarter.isEven}
           isVisible={isInView}
         />
@@ -225,6 +242,7 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: 
   const [hasAnimated, setHasAnimated] = useState(false)
   const [viewportChanged, setViewportChanged] = useState(false)
   const controls = useAnimation()
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768
 
   // Effect to handle initial animation when in view
   useEffect(() => {
@@ -305,17 +323,46 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: 
 
   return (
     <div ref={ref} className="relative z-10 min-h-[200px]">
-      {/* Timeline dot with pulse effect and dark circular background */}
+      {/* Timeline dot with pulse effect, glow animation, and dark circular background */}
       <div
         className={`absolute rounded-full z-10 flex items-center justify-center
-                  md:left-1/2 
-                  left-[80px] -translate-x-1/3 md:-translate-x-3
-                  ${isActive ? "md:w-6 md:h-6 w-2 h-2" : "w-5 h-5"}`}
-        style={{ backgroundColor: bgColor }}
+            md:left-1/2 
+            left-[80px] -translate-x-1/3 md:-translate-x-3
+            ${isActive ? "md:w-6 md:h-6 w-2 h-2" : "w-5 h-5"}`}
+        style={{
+          backgroundColor: bgColor,
+          top: isMobile && isActive ? "6px" : "auto", // Adjust position for mobile active state
+        }}
       >
+        {/* Outer glow animation that appears when section becomes active */}
+        <motion.div
+          className="absolute rounded-full"
+          initial={{ width: 0, height: 0, opacity: 0 }}
+          animate={
+            isActive
+              ? {
+                  width: ["0px", "60px", "40px"],
+                  height: ["0px", "60px", "40px"],
+                  opacity: [0, 0.6, 0],
+                }
+              : { width: 0, height: 0, opacity: 0 }
+          }
+          transition={{
+            duration: 1.5,
+            ease: "easeOut",
+            times: [0, 0.4, 1],
+          }}
+          style={{
+            backgroundColor: "transparent",
+            boxShadow: "0 0 20px 10px rgba(142, 250, 72, 0.6)",
+            zIndex: 5,
+          }}
+        />
+
+        {/* Regular pulse effect */}
         <motion.div
           className={`absolute rounded-full opacity-70
-                  ${isActive ? "md:w-6 md:h-6 w-3 h-3" : "w-6 h-6"}`}
+            ${isActive ? "md:w-6 md:h-6 w-3 h-3" : "w-6 h-6"}`}
           style={{ backgroundColor: pulseColor }}
           animate={{
             scale: [1, 1.2, 1],
@@ -327,12 +374,30 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: 
             repeatType: "loop",
           }}
         />
+
+        {/* Center dot with pop animation */}
         <motion.div
           className={`rounded-full z-20 ${isActive ? "md:w-2 md:h-2 w-1 h-1" : "w-2 h-2"}`}
           style={{ backgroundColor: dotColor }}
           initial={{ scale: 0 }}
-          animate={hasAnimated ? { scale: 1 } : { scale: 0 }}
-          transition={{ duration: 0.5 }}
+          animate={
+            hasAnimated
+              ? {
+                  scale: isActive ? [0.5, 1.5, 1] : 1,
+                  boxShadow: isActive
+                    ? [
+                        "0 0 0px rgba(142, 250, 72, 0)",
+                        "0 0 10px rgba(142, 250, 72, 0.8)",
+                        "0 0 5px rgba(142, 250, 72, 0.5)",
+                      ]
+                    : "none",
+                }
+              : { scale: 0 }
+          }
+          transition={{
+            duration: isActive ? 0.7 : 0.5,
+            ease: "easeOut",
+          }}
         />
       </div>
 
@@ -509,9 +574,23 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: 
               willChange: "opacity",
             }}
           >
-            <div style={{ transform: isEven ? "scaleX(1)" : "scaleX(-1)" }}>
+            <motion.div
+              style={{ transform: isEven ? "scaleX(1)" : "scaleX(-1)" }}
+              animate={
+                isActive
+                  ? {
+                      filter: [
+                        "drop-shadow(0 0 0px rgba(142, 250, 72, 0))",
+                        "drop-shadow(0 0 8px rgba(142, 250, 72, 0.7))",
+                        "drop-shadow(0 0 5px rgba(142, 250, 72, 0.3))",
+                      ],
+                    }
+                  : { filter: "none" }
+              }
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            >
               <Image src="/circuit.png" alt="Circuit design" width={140} height={89} className="object-contain" />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       )}
@@ -536,9 +615,23 @@ function RoadmapQuarter({ quarter, items, align, isActive, isEven, isVisible }: 
               transform: "translateY(-15px) translateX(-5px)",
             }}
           >
-            <div style={{ transform: "scaleX(-1)" }}>
+            <motion.div
+              style={{ transform: "scaleX(-1)" }}
+              animate={
+                isActive
+                  ? {
+                      filter: [
+                        "drop-shadow(0 0 0px rgba(142, 250, 72, 0))",
+                        "drop-shadow(0 0 8px rgba(142, 250, 72, 0.7))",
+                        "drop-shadow(0 0 5px rgba(142, 250, 72, 0.3))",
+                      ],
+                    }
+                  : { filter: "none" }
+              }
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            >
               <Image src="/circuit.png" alt="Circuit design" width={140} height={89} className="object-contain" />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       )}

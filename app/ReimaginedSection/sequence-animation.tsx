@@ -35,10 +35,10 @@ export default function SequenceAnimation() {
 
   const getShieldPosition = (direction: Direction, step: number): PositionStyle => {
     const positions: Record<Direction, PositionStyle> = {
-      topLeft: { top: "-10px", left: "-32px" },
-      topRight: { top: "-19px", right: "-34px" },
-      bottomLeft: { bottom: "29px", left: "-31px" },
-      bottomRight: { bottom: "28px", right: "-32px" },
+      topLeft: { top: "-13px", left: "-32px" },
+      topRight: { top: "-24px", right: "-34px" },
+      bottomLeft: { bottom: "26px", left: "-31px" },
+      bottomRight: { bottom: "24px", right: "-32px" },
     }
 
     if (step === 1) {
@@ -57,13 +57,13 @@ export default function SequenceAnimation() {
     if (step === 2) {
       switch (direction) {
         case "topLeft":
-          return { top: "-120px", left: "-200px" }
+          return { top: "-100px", left: "-100px" }
         case "topRight":
-          return { top: "-120px", right: "-200px" }
+          return { top: "-100px", right: "-100px" }
         case "bottomLeft":
-          return { bottom: "-120px", left: "-200px" }
+          return { bottom: "-80px", left: "-100px" }
         case "bottomRight":
-          return { bottom: "-120px", right: "-200px" }
+          return { bottom: "-80px", right: "-100px" }
       }
     }
 
@@ -73,7 +73,7 @@ export default function SequenceAnimation() {
   return (
     <div className="transform-container scale-[0.55] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
       <div
-        className="relative w-[504px] h-[320px] scale-[1.1] md:translate-x-[1.5rem] md:translate-y-[-0.5rem] 2xl:translate-x-[-5rem] mx-auto overflow-hidden rounded-xl"
+        className="relative w-[504px] h-[317px] scale-[1.1] md:translate-x-[1.5rem] md:translate-y-[-0.5rem] 2xl:translate-x-[-5rem] mx-auto overflow-hidden rounded-xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -153,7 +153,7 @@ export default function SequenceAnimation() {
               alt="Shield Bottom Left"
               width={304}
               height={149}
-              className="w-[304px] h-[149px]"
+              className="w-[304px] h-[155px]"
             />
           </div>
 
@@ -163,21 +163,21 @@ export default function SequenceAnimation() {
               alt="Shield Bottom Right"
               width={283}
               height={200}
-              className="w-[283px] h-[200px]"
+              className="w-[283px] h-[210px]"
             />
           </div>
         </div>
 
         <div
-          className={`absolute bottom-8 right-8 z-30 transition-opacity duration-500 ${
+          className={`absolute bottom-[3.4rem] right-[3.4rem] z-30 transition-opacity duration-500 ${
             step === 2 ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div className="text-right flex flex-col">
-            <span className="text-[22px] font-normal tracking-tighter block" style={gradientStyle}>
+          <div className="text-left flex flex-col">
+            <span className="text-[20px] font-normal tracking-tighter block" style={gradientStyle}>
               Built With AI
             </span>
-            <span className="text-[14px] font-light leading-[1.1] block" style={gradientStyle}>
+            <span className="text-[20px]  translate-y-[-0.5rem] leading-[1.1] block" style={gradientStyle}>
               Powered By You
             </span>
           </div>
