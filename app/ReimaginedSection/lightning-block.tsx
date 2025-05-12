@@ -17,7 +17,7 @@ export default function LightningBlock() {
   }
 
   return (
-    <div className="transform-container scale-[0.6] md:scale-100 xl:scale-[1.07] 2xl:scale-[1.3] 2xl:-translate-x-[8rem] 2xl:translate-y-[2rem] xl:translate-y-[-0.8rem] xl:-translate-x-2.5 h-full flex items-center justify-center">
+    <div className="transform-container scale-[0.72] md:scale-100 xl:scale-[1.07] 2xl:scale-[1.3] 2xl:-translate-x-[6rem] 2xl:translate-y-[2rem] xl:translate-y-[-0.8rem] xl:-translate-x-2.5 h-full flex items-center justify-center">
       <div
         className="relative w-[504px] h-[320px] md:translate-y-[0.5rem] mx-auto overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}

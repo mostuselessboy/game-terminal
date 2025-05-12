@@ -12,15 +12,15 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="font-clash-display w-full bg-gradient-to-b pt-[10rem] from-[#141414] to-black text-white py-16">
+    <footer style={{background: 'linear-gradient(0deg, #35780a45, #000)', borderImage: 'linear-gradient(45deg, #66b734, #000, #3a7516, #e3d1ff63, #000) 40', color: '#cecece', borderTop: '1px solid #f5f5f500'}} className="font-clash-display w-full bg-gradient-to-b  from-[#141414]  to-black text-white ">
       <div className="container mx-auto px-4 flex flex-col items-center">
         {/* Logo */}
-        <div className="mb-8">
+        <div className="mb-4">
           <img src="./logo.svg" alt="Logo" className="h-10" />
         </div>
 
         {/* Tagline */}
-        <div className="text-center mb-16 max-w-3xl">
+        <div className="text-center mb-5 max-w-3xl">
           <h2 className="text-xl md:text-2xl font-light bg-gradient-to-b from-white to-gray-400 text-transparent bg-clip-text">
             No Code, No Wait, From AI-Powered Creation To Telegram-Ready
           </h2>
@@ -30,12 +30,12 @@ export default function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-wrap justify-center gap-8 md:gap-12 mb-16">
+        <nav className="flex flex-wrap justify-center gap-8 md:gap-12 mb-8">
           {navLinks.map((link) => (
             <Link
               key={link.title}
               href={link.href}
-              className="bg-gradient-to-b from-[#8EFA48] to-[#4CAF50] hover:from-white hover:to-gray-300 text-transparent bg-clip-text transition-all duration-300 text-lg"
+              className="bg-gradient-to-b from-[#8EFA48] to-[#4CAF50] hover:from-white hover:to-gray-300 text-transparent bg-clip-text transition-all duration-300 text-md"
             >
               {link.title}
             </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
         </nav>
 
         {/* Social Media Icons */}
-        <div className="flex gap-6 mb-16">
+        <div className="flex gap-6 mb-6">
           <Link href="#" className="text-white hover:text-[#8EFA48] transition-colors">
             {/* LinkedIn icon matching the image */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -61,13 +61,13 @@ export default function Footer() {
         </div>
 
         {/* Gradient Divider - Wider now */}
-        <div className="w-full max-w-3xl mb-8 px-4">
+        <div className="w-full max-w-3xl mb-2 px-4">
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
         </div>
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="bg-gradient-to-b from-gray-400 to-gray-600 text-transparent bg-clip-text">
+          <p className="bg-gradient-to-b mb-3 from-gray-400 to-gray-600 text-transparent bg-clip-text">
             © {new Date().getFullYear()} GameTerminal.com. All Rights Reserved.
           </p>
         </div>

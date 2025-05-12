@@ -71,9 +71,9 @@ export default function SequenceAnimation() {
   }
 
   return (
-    <div className="transform-container scale-[0.55] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
+    <div className="transform-container scale-[0.67] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
       <div
-        className="relative w-[504px] h-[317px] scale-[1.1] md:translate-x-[1.5rem] md:translate-y-[-0.5rem] 2xl:translate-x-[-5rem] mx-auto overflow-hidden rounded-xl"
+        className="relative w-[504px] h-[317px] scale-[1.1] md:translate-x-[1.5rem] md:translate-y-[-0.5rem] 2xl:translate-x-[-3rem] mx-auto overflow-hidden rounded-xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

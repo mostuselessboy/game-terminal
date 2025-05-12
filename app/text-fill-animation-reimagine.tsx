@@ -96,7 +96,7 @@ export default function TextFillEffect() {
       `}</style>
 
       <section>
-        <div className="container" ref={containerRef}>
+        <div  ref={containerRef} className="mr-auto">
           <div className="space-y-2">
             <h2 className="text-2xl  md:text-4xl font-clash-display leading-tight animate-fill white-fill">
               No Code, No Wait,

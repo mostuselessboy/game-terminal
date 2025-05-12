@@ -120,3 +120,90 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+@layer components {
+  .clip-path-polygon {
+    clip-path: polygon(0% 0%, 0% 65%, 15% 100%, 100% 100%, 100% 35%, 75% 0%);
+  }
+
+  .gradient-border {
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-image: linear-gradient(0deg, #2b2b2b, hsla(0, 0%, 100%, 0.02)) 1 100%;
+  }
+}
+
+@layer utilities {
+  .glow-bar-nav {
+    background: linear-gradient(45deg, #6abd37, #8ffa4a);
+    box-shadow: 0 0.1rem 1rem #8ffa4a;
+    width: 100%;
+  }
+
+  .text-shadow-green {
+    text-shadow: 0 0 1rem #8ffa4a;
+  }
+
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+
+  .animate-fadeDown {
+    animation: fadeDown 0.5s ease-out forwards;
+  }
+
+  .animate-fadeUp {
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+
+  .animate-slideIn {
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(143, 250, 74, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(143, 250, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(143, 250, 74, 0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

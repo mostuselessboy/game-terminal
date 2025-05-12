@@ -22,17 +22,18 @@ export default function TeamMemberCard({ name, title, imageSrc, linkedinUrl }: T
 
   return (
     <div className="team-main-card">
-      <div className="team-image-container max-w-[10rem] mr-4">
+      <div className="team-image-container max-w-[9rem]">
         {imagesLoaded && (
-          <Image className="w-full rounded-3xl mx-2 h-[90%] object-cover " src={imageSrc || "/placeholder.svg"} alt={name} width={128} height={224} />
+          <Image className="w-full  grayscale rounded-none  min-w-[8rem] max-w-[8rem] mx-2 h-[90%] object-cover " src={imageSrc || "/placeholder.svg"} alt={name} width={128} height={224} />
         )}
       </div>
       <div className="team-info-card font-clash-display">
+        <span className="text-[#324029]">◣</span>
         <h1 className="text-white text-3xl">{name}</h1>
         <h2 className="g-grey">{title}</h2>
         <div className="team-social-container">
           <Link href={linkedinUrl} target="_blank">
-            <Image src="/linkedin.svg" width={32} height={32} alt="LinkedIn" style={{ width: "2rem" }} />
+            <Image src="/linkedin.svg" width={20} height={20} alt="LinkedIn" style={{ width: "1.5rem" }} />
           </Link>
 
         </div>
@@ -40,25 +41,23 @@ export default function TeamMemberCard({ name, title, imageSrc, linkedinUrl }: T
 
       <style jsx>{`
         .team-main-card {
-            backdrop-filter: blur(16px);
-            z-index: 2;
-            background: linear-gradient(90deg,#21212100,#0f0f0f96,#fff1f112,#0000004d,#0000002e);
-            border: .1px solid #aeaeae8a;
-            border-radius: 2rem;
-            width: 25rem;
-            height: 15rem;
-            margin: 0rem -0.1rem;
-            transition: all .8s;
+
+            width: 23rem;
             display: flex;
+            transition: .8s;
+            height: 12rem;
+            padding: 0 0.2rem;
             overflow: hidden;
-            box-shadow: 0 2px #7d7d7d, 1px 1px 5rem black, -.4px 0 0 #fff;
+            backdrop-filter: blur(6px);
+            border: 1px solid;
+            border-image: linear-gradient(45deg, #58d42b, transparent, #5bda61a7, #ffffff00, #ffffff00, #045d11) 29;
+            
         }
 
         .team-main-card:hover {
-          background-position-x: 28rem;
-          transform: scaleX(1.05) !important;
-          rotate: -2deg;
-          box-shadow: 3px -2px 0px white, 1px 1px 5rem #9773d216, -0.4px 1px 0rem white !important;
+        background-position-x: 28rem;
+        z-index: 4 !important;
+         box-shadow: 3px -2px 0px #0d5e20b0, 1px 1px 5rem #9773d216, -0.4px 1px 0rem white !important;
         }
 
         .team-image-container {
@@ -66,18 +65,10 @@ export default function TeamMemberCard({ name, title, imageSrc, linkedinUrl }: T
           align-items: center;
         }
 
-        .team-image {
-          width: 8rem;
-          object-fit: cover;
-          filter: grayscale(0.9);
-          height: 14rem;
-          margin: auto;
-          border-radius: 1rem;
-        }
 
         .team-info-card {
-          width: 15rem;
-          height: 12rem;
+          width: 8rem;
+          height: 10rem;
           margin: auto;
           margin-left: 1rem;
           display: flex;
@@ -86,7 +77,7 @@ export default function TeamMemberCard({ name, title, imageSrc, linkedinUrl }: T
         }
 
         .team-info-card h1 {
-          font-size: 1.3rem;
+          font-size: 1rem;
           width: 100%;
         }
 
@@ -111,7 +102,7 @@ export default function TeamMemberCard({ name, title, imageSrc, linkedinUrl }: T
 
         .team-social-container {
           display: flex;
-          margin: 1rem 0;
+          margin: 0rem 0;
           height: 2rem;
           width: 100%;
           gap: 0 1rem;
