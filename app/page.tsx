@@ -80,7 +80,7 @@ function ReimaginedSection() {
   // Calculate scale factor based on container width
 
   return (
-    <section className="text-white py-24 pt-0 mt-20 md:pb-4 relative mb-20 bg-[#0F0F0F]">
+    <section className="text-white py-24 pt-0 mt-0 md:pb-4 relative mb-20 bg-[#0F0F0F]">
       <div className="w-full mx-auto px-4 lg:max-w-7xl md:max-w-6xl xl:max-w-7xl 2xl:max-w-[1500px] ">
         {/* Section Header */}
         <div className="md:mb-2 p-4 md:pb-10 max-w-8xl md:max-w-6xl lg:max-w-[1400px] mx-auto  ">
@@ -277,13 +277,10 @@ function HeroSection() {
               </span>
             </span>
           </h1>
-          <p className="text-gray-300 text-sm md:text-lg max-w-2xl mx-auto">
-            GameTerminal turns your ideas into live games with deploy-ready tokens, AI agents, and instant Telegram
-            export - all from one command.
-          </p>
+    <span className="min-h-[10vh] h-[10vh] text-transparent">.</span>
         </div>
 
-        <img src="./herobg-mobile.png" className="object-cover md:hidden select-none pointer-events-none" alt="" />
+        <video autoPlay muted loop playsInline src="./herosection5.webm" className="object-cover md:hidden select-none pointer-events-none h-[25vh] scale-[1.1]"  />
 
         {/* Game Input with video directly attached */}
         <div className="relative max-w-3xl mx-auto">
@@ -293,10 +290,7 @@ function HeroSection() {
               {/* Video with no clip path */}
               <video
                 src="./herosection5.webm"
-                autoPlay
-                muted
-                loop
-                playsInline
+
                 className="max-w-fit object-cover h-[25rem] mix-blend-color-burn absolute left-1/2 -translate-x-1/2 bottom-0"
               />
 
@@ -317,11 +311,11 @@ function HeroSection() {
             className="mt-[2vh] md:mt-[39vh] lg:mt-[40vh] xl:mt-[42vh] 2xl:mt-[44vh] p-1 bg-[#151A15] flex flex-row items-center gap-4 backdrop-blur-sm rounded-2xl relative z-10"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
             <div className="w-full p-[1px] bg-gradient-to-br from-[#293728] via-[#101710] to-[#101710] rounded-xl">
               <div className="flex items-center justify-between w-full bg-gradient-to-b p-2 from-[#101710] to-[#101410] rounded-xl">
-                <div className="flex-1 px-4 py-3 text-white text-md md:text-xl h-14 flex items-center overflow-hidden pointer-events-none select-none">
+                <div className="flex-1 px-4 py-3 text-white text-md md:text-xl h-[2.5rem] md:h-14 flex items-center overflow-hidden pointer-events-none select-none">
                   <AnimatePresence mode="wait">
                     <ShiningText />
                   </AnimatePresence>
@@ -395,13 +389,22 @@ function SolutionSection() {
         <TextFillEffectSolutions />
       </motion.h1>
 
-      <div className="translate-y-[-2rem] md:translate-y-[-10rem] flex flex-col items-center max-w-[99vw] overflow-hidden">
-      <div className="flex gap-3 md:flex-row flex-col  ">
-      <LottiePlayer animationJson={slowGameDev} className="w-xs lg:w-sm 2xl:w-md 3xl:w-md"/>
-      <LottiePlayer animationJson={complexToen} className="w-xs lg:w-sm 2xl:w-md 3xl:w-md"/>
-      <LottiePlayer animationJson={broken} className="w-xs lg:w-sm 2xl:w-md 3xl:w-md"/>
-      </div>
-      <LottiePlayer animationJson={sustain} className="w-2xl lg:w-xl 2xl:w-3xl 3xl:w-5xl"/>
+<div className="translate-y-[-2rem] md:translate-y-[-10rem] flex flex-col items-center max-w-[99vw] overflow-hidden">
+  <div className="flex gap-3 md:flex-row flex-col">
+    <LottiePlayer
+      animationJson={slowGameDev}
+      className="w-xs lg:w-sm 2xl:w-md 3xl:w-md rounded-[13px] border border-[#373737bf] overflow-hidden md:rounded-none md:border-none"
+    />
+    <LottiePlayer
+      animationJson={complexToen}
+      className="w-xs lg:w-sm 2xl:w-md 3xl:w-md rounded-[13px] border border-[#373737bf] overflow-hidden md:rounded-none md:border-none"
+    />
+    <LottiePlayer
+      animationJson={broken}
+      className="w-xs lg:w-sm 2xl:w-md 3xl:w-md rounded-[13px] border border-[#373737bf] overflow-hidden md:rounded-none md:border-none"
+    />
+  </div>
+<LottiePlayer animationJson={sustain} className="w-2xl lg:w-xl 2xl:w-3xl 3xl:w-5xl"/>
 </div>
       {/* <motion.img
         src="./solution-content.svg"
@@ -425,9 +428,9 @@ function SolutionSection() {
 
 function ArchitectureSection() {
   return (
-    <div className="flex flex-col items-center mx-auto w-full translate-y-[-2rem] bg-gradient-to-b from-[#000] to-[#0D0D0D]">
+    <div className="flex flex-col items-center mx-auto w-full translate-y-[-1rem] md:translate-y-[-10rem] bg-gradient-to-b from-[#000] to-[#0D0D0D]">
       <motion.h1
-        className="md:text-4xl z-[2] text-2xl translate-y-[12rem] lg:translate-y-[12rem] leading-[1] mb-6 tracking-tight text-center w-full"
+        className="md:text-4xl z-[2] text-2xl translate-y-[9rem] md:translate-y-[11rem] lg:translate-y-[13rem] xl:translate-y-[19rem] 2xl:translate-y-[16rem]  leading-[1] mb-6 tracking-tight text-center w-full"
         initial={{ opacity: 0, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, filter: "blur(0px)" }}
         viewport={{ margin: "-100px" }}

@@ -4,8 +4,18 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
 export default function ShiningText() {
-  const text = "A game about hide and seek"
-  const words = text.split(" ")
+const textList = [
+  "A game about whispers",
+  "A game about hide and seek",
+  "A game about chambers",
+  "A game about vanishing",
+  "A game about mirror world",
+  "A game about secret rooms",
+  "A game about looping time"
+]
+
+  const [textIndex, setTextIndex] = useState(0)
+  const [words, setWords] = useState(textList[0].split(" "))
   const [animationPhase, setAnimationPhase] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
@@ -13,47 +23,39 @@ export default function ShiningText() {
     let interval: NodeJS.Timeout
 
     if (!isPaused) {
-      // Fast animation when not paused
       interval = setInterval(() => {
         setAnimationPhase((prev) => {
-          const next = prev + 0.3 // Faster movement (was 0.2)
-
-          // Check if we've completed a full cycle
+          const next = prev + 0.3
           if (next >= words.length) {
-            // Pause for 1 second before next cycle
             setIsPaused(true)
-            setTimeout(() => setIsPaused(false), 1000)
-            return 0 // Reset to beginning
+            setTimeout(() => {
+              const nextIndex = (textIndex + 1) % textList.length
+              setTextIndex(nextIndex)
+              setWords(textList[nextIndex].split(" "))
+              setAnimationPhase(0)
+              setIsPaused(false)
+            }, 1000)
+            return 0
           }
-
           return next
         })
-      }, 30) // Update more frequently for smoother animation
+      }, 30)
     }
 
     return () => {
       if (interval) clearInterval(interval)
     }
-  }, [isPaused, words.length])
+  }, [isPaused, words.length, textIndex])
 
-  // Calculate wave position
   const getWavePosition = (index: number) => {
-    if (isPaused) return 0 // No movement during pause
-
-    // Create a wave that moves across the words
+    if (isPaused) return 0
     const distanceFromCenter = Math.abs(index - animationPhase)
-
-    // Create a sharper falloff for faster animation
     const falloff = Math.max(0, 1.2 - distanceFromCenter)
-
-    // Calculate y position - only lift upward (negative values)
-    return -10 * falloff // Increased lift for more dramatic effect
+    return -10 * falloff
   }
 
-  // Calculate gradient intensity
   const getGradientOpacity = (index: number) => {
-    if (isPaused) return 0 // No gradient during pause
-
+    if (isPaused) return 0
     const distanceFromCenter = Math.abs(index - animationPhase)
     return Math.max(0, 1 - distanceFromCenter)
   }
@@ -68,26 +70,14 @@ export default function ShiningText() {
           return (
             <motion.div
               key={index}
-              animate={{
-                y: yPosition,
-              }}
-              transition={{
-                duration: 0.1, // Faster transition
-                ease: "easeOut",
-              }}
+              animate={{ y: yPosition }}
+              transition={{ duration: 0.1, ease: "easeOut" }}
               className="relative"
             >
-              {/* Base word (dim when not active) */}
               <span className="text-white/20">{word}</span>
-
-              {/* Gradient overlay with variable opacity */}
               <motion.span
-                animate={{
-                  opacity: gradientOpacity,
-                }}
-                transition={{
-                  duration: 0.1, // Faster transition
-                }}
+                animate={{ opacity: gradientOpacity }}
+                transition={{ duration: 0.1 }}
                 className="absolute inset-0 bg-clip-text text-transparent bg-gradient-to-r from-gray-100 via-gray-300 to-gray-400 font-medium"
               >
                 {word}

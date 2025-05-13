@@ -12,7 +12,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer style={{background: 'linear-gradient(0deg, #35780a45, #000)', borderImage: 'linear-gradient(45deg, #66b734, #000, #3a7516, #e3d1ff63, #000) 40', color: '#cecece', borderTop: '1px solid #f5f5f500'}} className="font-clash-display w-full bg-gradient-to-b  from-[#141414]  to-black text-white ">
+    <footer style={{background: 'linear-gradient(0deg, #35780a45, #000 20%)', borderImage: 'linear-gradient(45deg, #66b734, #000, #3a7516, #e3d1ff63, #000) 40', color: '#cecece', borderTop: '1px solid #f5f5f500'}} className="font-clash-display w-full bg-gradient-to-b  from-[#141414]  to-black text-white ">
       <div className="container mx-auto px-4 flex flex-col items-center">
         {/* Logo */}
         <div className="mb-4">
@@ -21,26 +21,16 @@ export default function Footer() {
 
         {/* Tagline */}
         <div className="text-center mb-5 max-w-3xl">
-          <h2 className="text-xl md:text-2xl font-light bg-gradient-to-b from-white to-gray-400 text-transparent bg-clip-text">
+          <h2 className="text-lg md:text-xl font-light bg-gradient-to-b from-white to-gray-400 text-transparent bg-clip-text">
             No Code, No Wait, From AI-Powered Creation To Telegram-Ready
           </h2>
-          <h2 className="text-xl md:text-2xl font-light bg-gradient-to-b from-gray-400 to-gray-600 text-transparent bg-clip-text">
+          <h2 className="text-lg md:text-xl font-light bg-gradient-to-b from-gray-400 to-gray-600 text-transparent bg-clip-text">
             Playability...
           </h2>
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-wrap justify-center gap-8 md:gap-12 mb-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className="bg-gradient-to-b from-[#8EFA48] to-[#4CAF50] hover:from-white hover:to-gray-300 text-transparent bg-clip-text transition-all duration-300 text-md"
-            >
-              {link.title}
-            </Link>
-          ))}
-        </nav>
+
 
         {/* Social Media Icons */}
         <div className="flex gap-6 mb-6">
@@ -58,6 +48,12 @@ export default function Footer() {
             </svg>
             <span className="sr-only">Twitter</span>
           </Link>
+
+          {/* TELEGRAM */}
+          <Link href="#" className="text-white hover:text-[#8EFA48] transition-colors -translate-x-1">
+            {/* Telegram icon matching the image */}
+        <svg stroke="currentColor" fill="currentColor"  viewBox="0 0 448 512" width="26" height="26"  xmlns="http://www.w3.org/2000/svg"><path d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z"></path></svg>
+        </Link>
         </div>
 
         {/* Gradient Divider - Wider now */}
@@ -67,7 +63,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center">
-          <p className="bg-gradient-to-b mb-3 from-gray-400 to-gray-600 text-transparent bg-clip-text">
+          <p className="bg-gradient-to-b mb-3 p-2 pb-5  from-gray-400 to-gray-600 text-transparent bg-clip-text">
             © {new Date().getFullYear()} GameTerminal.com. All Rights Reserved.
           </p>
         </div>

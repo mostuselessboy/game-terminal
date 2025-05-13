@@ -8,15 +8,12 @@ export default function InfiniteCarousel() {
 
   const carouselImages = [
     '/partner-maven.png',
-    '/partner-nbc.png',
     '/partner-telos.png',
     '/partner-yay.png',
     '/partner-maven.png',
-    '/partner-nbc.png',
     '/partner-telos.png',
     '/partner-yay.png',
     '/partner-maven.png',
-    '/partner-nbc.png',
     '/partner-telos.png',
     '/partner-yay.png'
   ]
