@@ -25,7 +25,7 @@ export default function TelegramBlock() {
   }
 
   return (
-    <div className="transform-container scale-[0.70] md:scale-100 xl:scale-[1.05] 2xl:scale-[1.25] 2xl:translate-y-[2.5rem] 2xl:translate-x-[3.1rem] h-full flex items-center justify-center">
+    <div className="transform-container scale-[0.63] md:scale-100 xl:scale-[1.05] 2xl:scale-[1.25] 2xl:translate-y-[2.5rem] 2xl:translate-x-[3.1rem] h-full flex items-center justify-center">
       <div
         ref={containerRef}
         className="relative w-[520px] h-[336px] mx-auto"

@@ -9,18 +9,18 @@ export default function ReimaginedCombinedCards() {
       
       <div className="grid grid-cols-1 mx-auto w-fit gap-[1rem] md:grid-cols-2 md:gap-[4rem] md:gap-y-[1rem] xl:gap-[3rem] xl:gap-y-[2.5rem] 2xl:gap-[1.5rem] 2xl:gap-y-[4rem] max-w-[1050px]">
         {/* Top row becomes first two items stacked on mobile */}
-        <div className="mx-auto w-full flex justify-center h-[176px] md:h-auto">
+        <div className="mx-auto w-full flex justify-center h-[180px] md:h-auto">
           <SequenceAnimation />
         </div>
-        <div className="mx-auto w-full flex justify-center h-[340px] md:h-auto">
+        <div className="mx-auto w-full flex justify-center h-[280px] md:h-auto">
           <AnimatedCube />
         </div>
 
         {/* Bottom row becomes next two items stacked on mobile */}
-        <div className="mx-auto w-full flex justify-center h-[200px] md:h-auto">
+        <div className="mx-auto w-full flex justify-center h-[180px] md:h-auto">
           <LightningBlock />
         </div>
-        <div className="mx-auto w-full flex justify-center h-[280px] md:h-auto">
+        <div className="mx-auto w-full flex justify-center h-[250px] md:h-auto">
           <TelegramBlock />
         </div>
       </div>

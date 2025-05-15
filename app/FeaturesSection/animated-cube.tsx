@@ -25,7 +25,7 @@ export default function AnimatedCube() {
   }
 
   return (
-    <div className="transform-container scale-[0.84] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
+    <div className="transform-container scale-[0.76] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
       <div
         ref={containerRef}
         className="relative w-[448px] h-[327px] mx-auto md:translate-x-[1rem] xl:translate-x-[2rem] 2xl:translate-x-[4rem]"
