@@ -125,7 +125,7 @@ export default function RoadmapPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-20">
+    <div className="min-h-screen flex items-center justify-center py-20 md:pb-20 pb-2">
       <div className="mx-auto w-full px-5">
         <div className="relative">
           {/* Vertical timeline with dashes instead of dots - desktop only */}

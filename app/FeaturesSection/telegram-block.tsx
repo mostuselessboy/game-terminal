@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
+import { useInView } from "./use-in-view"
+import { useMobile } from "./use-mobile-view"
 
 export default function TelegramBlock() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isManuallyHovered, setIsManuallyHovered] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef)
+  const isMobile = useMobile()
+
+  // Only combine hover states on mobile
+  const isHovered = isManuallyHovered || (isMobile && isInView)
 
   // Define gradient style directly
   const gradientStyle = {
@@ -19,9 +27,10 @@ export default function TelegramBlock() {
   return (
     <div className="transform-container scale-[0.70] md:scale-100 xl:scale-[1.05] 2xl:scale-[1.25] 2xl:translate-y-[2.5rem] 2xl:translate-x-[3.1rem] h-full flex items-center justify-center">
       <div
+        ref={containerRef}
         className="relative w-[520px] h-[336px] mx-auto"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsManuallyHovered(true)}
+        onMouseLeave={() => setIsManuallyHovered(false)}
       >
         {/* Container */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">

@@ -33,6 +33,7 @@ const Navbar = () => {
     "architecture",
     "roadmap",
     "backers",
+    "advisors",
     "faq",
   ]
 
@@ -77,6 +78,7 @@ const Navbar = () => {
     { name: "Architecture", path: "/#architecture", section: "architecture" },
     { name: "Roadmap", path: "/#roadmap", section: "roadmap" },
     { name: "Backers", path: "/#backers", section: "backers" },
+    { name: "Advisors", path: "/#advisors", section: "advisors" },
     { name: "FAQ", path: "/#faq", section: "faq" },
   ]
 
@@ -106,7 +108,7 @@ const Navbar = () => {
           </div>
 
           <div className="get-started-container">
-            <Link href="#" className="get-started-link">
+            <Link href="https://dev.game-terminal.buildverse.app/" className="get-started-link">
               <div className="get-started-button">
                 <div className="get-started-gradient-1">
                   <div className="get-started-gradient-2">
@@ -130,7 +132,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="mobile-menu-items">
+          <div className="mobile-menu-items max-h-[90vh] overflow-scroll">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
@@ -143,7 +145,7 @@ const Navbar = () => {
             ))}
 
             <div className="mobile-get-started">
-              <Link href="#" onClick={() => handleNavClick("")} className="get-started-link">
+              <Link href="https://dev.game-terminal.buildverse.app/" onClick={() => handleNavClick("")} className="get-started-link">
                 <div className="get-started-button">
                   <div className="get-started-gradient-1">
                     <div className="get-started-gradient-2">

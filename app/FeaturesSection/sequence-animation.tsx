@@ -1,14 +1,24 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
+import { useInView } from "./use-in-view"
+import { useMobile } from "./use-mobile-view"
 
 type Direction = "topLeft" | "topRight" | "bottomLeft" | "bottomRight"
 type PositionStyle = React.CSSProperties
 
 export default function SequenceAnimation() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isManuallyHovered, setIsManuallyHovered] = useState(false)
   const [step, setStep] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef)
+  const isMobile = useMobile()
+
+  // Only combine hover states on mobile
+  const isHovered = isManuallyHovered || (isMobile && isInView)
 
   useEffect(() => {
     if (isHovered) {
@@ -73,9 +83,10 @@ export default function SequenceAnimation() {
   return (
     <div className="transform-container scale-[0.67] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
       <div
+        ref={containerRef}
         className="relative w-[504px] h-[317px] scale-[1.1] md:translate-x-[1.5rem] md:translate-y-[-0.5rem] 2xl:translate-x-[-3rem] mx-auto overflow-hidden rounded-xl"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsManuallyHovered(true)}
+        onMouseLeave={() => setIsManuallyHovered(false)}
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
@@ -127,7 +138,10 @@ export default function SequenceAnimation() {
             marginTop: "0rem",
           }}
         >
-          <div className="absolute z-20 transition-all duration-500 ease-out" style={getShieldPosition("topLeft", step)}>
+          <div
+            className="absolute z-20 transition-all duration-500 ease-out"
+            style={getShieldPosition("topLeft", step)}
+          >
             <Image
               src="/reimaginesec-1-shield-top-left.svg"
               alt="Shield Top Left"
@@ -137,7 +151,10 @@ export default function SequenceAnimation() {
             />
           </div>
 
-          <div className="absolute z-20 transition-all duration-500 ease-out" style={getShieldPosition("topRight", step)}>
+          <div
+            className="absolute z-20 transition-all duration-500 ease-out"
+            style={getShieldPosition("topRight", step)}
+          >
             <Image
               src="/reimaginesec-1-shield-top-right.svg"
               alt="Shield Top Right"
@@ -147,7 +164,10 @@ export default function SequenceAnimation() {
             />
           </div>
 
-          <div className="absolute z-20 transition-all duration-500 ease-out" style={getShieldPosition("bottomLeft", step)}>
+          <div
+            className="absolute z-20 transition-all duration-500 ease-out"
+            style={getShieldPosition("bottomLeft", step)}
+          >
             <Image
               src="/reimaginesec-1-shield-bottom-left.svg"
               alt="Shield Bottom Left"
@@ -157,7 +177,10 @@ export default function SequenceAnimation() {
             />
           </div>
 
-          <div className="absolute z-20 transition-all duration-500 ease-out" style={getShieldPosition("bottomRight", step)}>
+          <div
+            className="absolute z-20 transition-all duration-500 ease-out"
+            style={getShieldPosition("bottomRight", step)}
+          >
             <Image
               src="/reimaginesec-1-shield-bottom-right.svg"
               alt="Shield Bottom Right"

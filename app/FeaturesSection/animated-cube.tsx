@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
+import { useInView } from "./use-in-view"
+import { useMobile } from "./use-mobile-view"
 
 export default function AnimatedCube() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isManuallyHovered, setIsManuallyHovered] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef)
+  const isMobile = useMobile()
+
+  // Only combine hover states on mobile
+  const isHovered = isManuallyHovered || (isMobile && isInView)
 
   // Define gradient style directly
   const gradientStyle = {
@@ -19,9 +27,10 @@ export default function AnimatedCube() {
   return (
     <div className="transform-container scale-[0.84] md:scale-100 xl:scale-[1.1] 2xl:scale-[1.3] h-full flex items-center justify-center">
       <div
+        ref={containerRef}
         className="relative w-[448px] h-[327px] mx-auto md:translate-x-[1rem] xl:translate-x-[2rem] 2xl:translate-x-[4rem]"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsManuallyHovered(true)}
+        onMouseLeave={() => setIsManuallyHovered(false)}
       >
         {/* Text overlay */}
         <div className="absolute inset-0 z-10 flex flex-col justify-start items-start p-8 text-left">

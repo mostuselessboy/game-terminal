@@ -8,7 +8,7 @@ import TextFillEffect from "./text-fill-animation-reimagine"
 import RoadmapComponent from "./roadmap"
 import ShiningText from "./shining-text"
 
-import ReimaginedCombinedCards from "./ReimaginedSection/reimagine-combined"
+import ReimaginedCombinedCards from "./FeaturesSection/reimagine-combined"
 import Navbar from "./header"
 import Footer from "./footer"
 import TeamMemberCard from "./team-member-card"
@@ -80,8 +80,10 @@ function ReimaginedSection() {
   // Calculate scale factor based on container width
 
   return (
-    <section className="text-white py-24 pt-0 mt-0 md:pb-4 relative mb-20 bg-[#0F0F0F]">
-      <div className="w-full mx-auto px-4 lg:max-w-7xl md:max-w-6xl xl:max-w-7xl 2xl:max-w-[1500px] ">
+    <section className="text-white py-24 pt-0 mt-0 md:pb-6 md:mb-10 pb-0 relative mb-0 bg-[#0F0F0F]">
+      <img src={'./feature-section-design-elem-1.svg'}  className="md:block hidden bg-transparent absolute top-0 left-0 min-h-screen "/>
+      <img src={'./feature-section-design-elem-2.svg'}  className="md:block hidden bg-transparent absolute top-0 right-0 min-h-screen "/>
+      <div className="w-full mx-auto px-4 2xl:translate-x-[1rem] lg:max-w-7xl md:max-w-6xl xl:max-w-7xl 2xl:max-w-[1500px] ">
         {/* Section Header */}
         <div className="md:mb-2 p-4 md:pb-10 max-w-8xl md:max-w-6xl lg:max-w-[1400px] mx-auto  ">
           {/* Reimagined label with enhanced shine effect */}
@@ -290,7 +292,10 @@ function HeroSection() {
               {/* Video with no clip path */}
               <video
                 src="./herosection5.webm"
-
+                autoPlay
+                muted
+                loop
+                playsInline
                 className="max-w-fit object-cover h-[25rem] mix-blend-color-burn absolute left-1/2 -translate-x-1/2 bottom-0"
               />
 
@@ -320,6 +325,7 @@ function HeroSection() {
                     <ShiningText />
                   </AnimatePresence>
                 </div>
+                <Link href="https://dev.game-terminal.buildverse.app/">
                 <motion.button
                   className="text-black font-normal px-2 py-1 md:px-6 md:py-3 rounded h-auto text-md md:text-lg whitespace-nowrap relative overflow-hidden group"
                   whileHover={{ scale: 1.05 }}
@@ -330,6 +336,7 @@ function HeroSection() {
                   <span className="absolute inset-0 w-full h-full shadow-[0_0_0_2px_rgba(0,0,0,0.15),0_4px_10px_rgba(0,0,0,0.25)] rounded-xl glow-effect-strong"></span>
                   <span className="relative z-10 font-semibold tracking-tight text-sm md:text-lg">Get Started</span>
                 </motion.button>
+                </Link>
               </div>
             </div>
           </motion.div>
@@ -526,12 +533,14 @@ function BackerSection() {
       <motion.img
         src="./backer-header-bg.svg"
         className="object-center mb-32"
+        id='backers'
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ margin: "-100px" }}
         transition={{ duration: 0.4, delay: 0.1 }}
       />
       <motion.h1
+      
         className="md:text-4xl text-2xl -translate-y-[10rem] font-clash-display leading-[1]  tracking-tight font-[400] text-center w-full"
         initial={{ opacity: 0, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, filter: "blur(0px)" }}
@@ -543,8 +552,8 @@ function BackerSection() {
         </span>
       </motion.h1>
 
-      <PartnersCarousel />
 
+      <PartnersCarousel />
 
 
 {/* 
@@ -572,7 +581,19 @@ function BackerSection() {
           />
         ))}
       </div> */}
-  <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-4 mb-10">
+      <motion.h1
+      
+        className="md:text-4xl text-2xl font-clash-display leading-[1]  tracking-tight font-[400] mb-10 text-center w-full"
+        initial={{ opacity: 0, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, filter: "blur(0px)" }}
+        viewport={{ margin: "-100px" }}
+        transition={{ duration: 0.5, delay: 0.15 }}
+      >
+        <span className="bg-gradient-to-br from-gray-200 via-gray-400 to-white bg-clip-text text-transparent">
+          Advisors
+        </span>
+      </motion.h1>
+  <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-4 mb-10" id='advisors'>
       <TeamMemberCard name="Enigma Fund" title="Enigma Fund VC" imageSrc="/backers/enigma.jpeg" linkedinUrl="https://www.linkedin.com/in/akashsinha26?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
       <TeamMemberCard name="Siddarth Menon" title="COO WazirX" imageSrc="/backers/siddarth.jpeg" linkedinUrl="https://www.linkedin.com/in/siddharthmenon/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
       <TeamMemberCard name="Rudy Koch" title="Co-founder Mythical Games" imageSrc="/backers/rudy.jpeg" linkedinUrl="https://www.linkedin.com/in/rudykoch?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
@@ -818,7 +839,7 @@ export default function Page() {
         <RoadmapSection />
       </div>
 
-      <div id="backers">
+      <div>
         <BackerSection/>
       </div>
 

@@ -12,21 +12,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
+
 export const metadata: Metadata = {
-  title: "Game Terminal",
-  description: "DEMO",
+  title: 'Game Terminal - Launch AI-powered Games with a single prompt',
+  description: 'GameTerminal turns your ideas into live games with deploy-ready tokens, AI agents, and instant Telegram export - all from one command.',
+  icons: {
+    icon: '/logo.svg', // path to your favicon file in public/
+  },
   openGraph: {
-    title: "Game Terminal",
-    description: "Game Terminal",
+    title: 'Game Terminal - Launch AI-powered Games with a single prompt',
+    description: 'GameTerminal turns your ideas into live games with deploy-ready tokens, AI agents, and instant Telegram export - all from one command.',
+    siteName: 'GameTerminal',
     images: [
       {
-        url: "./logo.png",
-        width: 800,
-        height: 600,
+        url: '/thumbnail.png', // BIG image for social
+        width: 1200,
+        height: 630,
+        alt: 'Game Terminal',
       },
-    ]
-  }
-};
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Game Terminal',
+    description: 'GameTerminal turns your ideas into live games with deploy-ready tokens, AI agents, and instant Telegram export - all from one command.',
+    images: ['/thumbnail.png'],
+  },
+}
 
 export default function RootLayout({
   children,

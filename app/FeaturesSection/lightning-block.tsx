@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
+import { useInView } from "./use-in-view"
+import { useMobile } from "./use-mobile-view"
 
 export default function LightningBlock() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isManuallyHovered, setIsManuallyHovered] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef)
+  const isMobile = useMobile()
+
+  // Only combine hover states on mobile
+  const isHovered = isManuallyHovered || (isMobile && isInView)
 
   // Define gradient style directly
   const gradientStyle = {
@@ -19,9 +27,10 @@ export default function LightningBlock() {
   return (
     <div className="transform-container scale-[0.72] md:scale-100 xl:scale-[1.07] 2xl:scale-[1.3] 2xl:-translate-x-[6rem] 2xl:translate-y-[2rem] xl:translate-y-[-0.8rem] xl:-translate-x-2.5 h-full flex items-center justify-center">
       <div
+        ref={containerRef}
         className="relative w-[504px] h-[320px] md:translate-y-[0.5rem] mx-auto overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={() => setIsManuallyHovered(true)}
+        onMouseLeave={() => setIsManuallyHovered(false)}
       >
         {/* Container */}
         <div className="absolute inset-0 w-full h-full">
