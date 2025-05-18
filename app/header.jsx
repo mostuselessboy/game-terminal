@@ -108,7 +108,7 @@ const Navbar = () => {
           </div>
 
           <div className="get-started-container">
-            <Link href="https://dev.game-terminal.buildverse.app/" className="get-started-link">
+            <Link target="_blank" href="https://dev.game-terminal.buildverse.app/" className="get-started-link">
               <div className="get-started-button">
                 <div className="get-started-gradient-1">
                   <div className="get-started-gradient-2">
@@ -137,6 +137,7 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 href={item.path}
+                
                 onClick={() => handleNavClick(item.section)}
                 className={`mobile-menu-item font-clash-display ${activeSection === item.section ? "active" : ""}`}
               >
@@ -145,7 +146,7 @@ const Navbar = () => {
             ))}
 
             <div className="mobile-get-started">
-              <Link href="https://dev.game-terminal.buildverse.app/" onClick={() => handleNavClick("")} className="get-started-link">
+              <Link target="_blank" href="https://dev.game-terminal.buildverse.app/" onClick={() => handleNavClick("")} className="get-started-link">
                 <div className="get-started-button">
                   <div className="get-started-gradient-1">
                     <div className="get-started-gradient-2">

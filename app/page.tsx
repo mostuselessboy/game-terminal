@@ -325,7 +325,7 @@ function HeroSection() {
                     <ShiningText />
                   </AnimatePresence>
                 </div>
-                <Link href="https://dev.game-terminal.buildverse.app/">
+                <Link target="_blank" href="https://dev.game-terminal.buildverse.app/">
                 <motion.button
                   className="text-black font-normal px-2 py-1 md:px-6 md:py-3 rounded h-auto text-md md:text-lg whitespace-nowrap relative overflow-hidden group"
                   whileHover={{ scale: 1.05 }}
