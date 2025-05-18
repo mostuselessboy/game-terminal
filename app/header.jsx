@@ -132,7 +132,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="mobile-menu-items max-h-[85mvh] overflow-scroll">
+          <div className="mobile-menu-items max-h-[80vh] overflow-scroll">
             {menuItems.map((item) => (
               <Link
                 key={item.path}
