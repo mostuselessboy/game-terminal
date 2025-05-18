@@ -9,7 +9,7 @@ export default function AnimatedCube() {
   const [isManuallyHovered, setIsManuallyHovered] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef)
-  const isMobile = useMobile()
+  const isMobile =true
 
   // Only combine hover states on mobile
   const isHovered = isManuallyHovered || (isMobile && isInView)

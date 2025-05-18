@@ -14,7 +14,7 @@ export function useInView(ref: RefObject<HTMLElement | null>, options?: Intersec
         setIsInView(entry.isIntersecting)
       },
       {
-        threshold: 0.3,
+        threshold: 0.8,
         ...options,
       },
     )

@@ -15,7 +15,7 @@ export default function SequenceAnimation() {
   const [step, setStep] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef)
-  const isMobile = useMobile()
+  const isMobile = true
 
   // Only combine hover states on mobile
   const isHovered = isManuallyHovered || (isMobile && isInView)
