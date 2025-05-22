@@ -595,7 +595,7 @@ function BackerSection() {
       </motion.h1>
   <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-4 mb-10" id='advisors'>
       <TeamMemberCard name="Enigma Fund" title="Enigma Fund VC" imageSrc="/backers/enigma.jpeg" linkedinUrl="https://www.linkedin.com/in/akashsinha26?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
-      <TeamMemberCard name="Siddarth Menon" title="COO WazirX" imageSrc="/backers/siddarth.jpeg" linkedinUrl="https://www.linkedin.com/in/siddharthmenon/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
+      <TeamMemberCard name="Siddarth Menon" title="Co-founder of Tegorfi" imageSrc="/backers/siddarth.jpeg" linkedinUrl="https://www.linkedin.com/in/siddharthmenon/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
       <TeamMemberCard name="Rudy Koch" title="Co-founder Mythical Games" imageSrc="/backers/rudy.jpeg" linkedinUrl="https://www.linkedin.com/in/rudykoch?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
       <TeamMemberCard name="Akash Sinha" title="COO Kryptos" imageSrc="/backers/akash.jpeg" linkedinUrl="https://www.linkedin.com/in/akashsinha26?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
       <TeamMemberCard name="Evan" title="Angel Investor" imageSrc="/backers/evan.jpeg" linkedinUrl="https://www.linkedin.com/in/evanluthra?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" />
